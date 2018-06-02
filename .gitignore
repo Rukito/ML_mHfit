@@ -43,3 +43,4 @@ missing
 src/libRootAnalysis.la
 HTTAnalysis/httAnalysis
 HTTAnalysis/.wscode.5f58a432-033a-11e7-9717-45a8a983beef.w/
+HTTAnalysis/*.txt
