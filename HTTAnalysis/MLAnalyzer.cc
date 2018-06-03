@@ -185,6 +185,7 @@ void MLAnalyzer::addBranch(TTree *tree)
 			tree->Branch("higgsPT", &higgsPT_);
 			tree->Branch("BJetBetaScore", &betaScore_);
 			tree->Branch("nJets30", &nJets30_);
+			tree->Branch("SVfitMass", &SVfitMass_);		//trudnick
 		}
 	}
 	else
@@ -408,6 +409,7 @@ void MLAnalyzer::globalsHTT(const MLObjectMessenger* mess, const std::vector<con
 	    betaScore_ = *bs;
 	    higgsMassTrans_ = *higgs_mass;
 	    nJets30_ = *nJets;
+	    SVfitMass_ = 1;		//trudnick
 	}
 	catch(const std::out_of_range& e)
 	{
