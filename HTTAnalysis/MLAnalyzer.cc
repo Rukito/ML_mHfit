@@ -396,11 +396,12 @@ void MLAnalyzer::globalsHTT(const MLObjectMessenger* mess, const std::vector<con
 		const float* bs = mess->getObject(static_cast<float*>(p), "beta_score");
 		const float* higgs_mass = mess->getObject(static_cast<float*>(p), "higgs_mass_trans");
 		const int* nJets = mess ->getObject(static_cast<int*>(p), "nJets30");
+		const float* SVfitMass = mess->getObject(static_cast<float*>(p), "SVfitMass");	//trudnick
 
 		const HTTParticle* leg1 = legs->at(0);
 		const HTTParticle* leg2 = legs->at(1);
 
-		if(!(leg1 && leg2 && aMET && aSystEffect && bs && higgs_mass && nJets))
+		if(!(leg1 && leg2 && aMET && aSystEffect && bs && higgs_mass && nJets && SVfitMass))
 			throw std::logic_error("[ERROR] NULL POINTERS PRESENT!");
 		// Calculation and assignement of global parameters
 		const TLorentzVector & aVisSum = leg1->getP4(*aSystEffect) + leg2->getP4(*aSystEffect);
@@ -409,7 +410,7 @@ void MLAnalyzer::globalsHTT(const MLObjectMessenger* mess, const std::vector<con
 	    betaScore_ = *bs;
 	    higgsMassTrans_ = *higgs_mass;
 	    nJets30_ = *nJets;
-	    SVfitMass_ = 1;		//trudnick
+	    SVfitMass_ = *SVfitMass;		//trudnick
 	}
 	catch(const std::out_of_range& e)
 	{
