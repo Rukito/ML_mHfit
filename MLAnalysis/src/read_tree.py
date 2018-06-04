@@ -112,11 +112,24 @@ def read_tree(file_name = "../../HTTAnalysis/RootAnalysis_AnalysisTT.root", tree
 	    	properties[prop].append(pyl.__getattribute__(prop).GetValue())
 
 	###### optional check (uncomment what is below)
-	# print(legs)
+	# print(global_params["METx"][0])
 	# plt.hist(properties[properties_names[0] ])
 	# plt.show()
-	with open("../Data/legs_list.txt", "wb") as f:
-	    pickle.dump(legs, f)
+
+	mHfit_params = []						#trudnick
+	for i in range (0, 3):						#trudnick
+	    mHfit_params.append([])					#trudnick
+
+	for i in range (0, len(global_params["SVfitMass"])):		#trudnick
+	    mHfit_params[0].append(global_params["SVfitMass"][i])	#trudnick
+	    mHfit_params[1].append(global_params["METx"][i])		#trudnick
+	    mHfit_params[2].append(global_params["METy"][i])		#trudnick
+
+	with open("../Data/raw_data.txt", "wb") as file1:          	#trudnick
+	    pickle.dump(mHfit_params, file1)                       	#trudnick
+
+	with open("../Data/legs_list.txt", "wb") as file2:		#trudnick
+	    pickle.dump(legs, file2)					#trudnick
 
 	#------ Finished ------------------------------------
 	print("[ML]\tConversion to python successful!")
