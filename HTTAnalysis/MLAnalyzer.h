@@ -91,6 +91,10 @@ class MLAnalyzer : public Analyzer
   float SVfitMass_;		//trudnick
   float METx_;  	 	//trudnick
   float METy_;	         	//trudnick
+  float cov00_;			//trudnick
+  float cov01_;                 //trudnick
+  float cov10_;                 //trudnick
+  float cov11_;                 //trudnick
 
   void extractP4(const TLorentzVector& v, const std::string destination, const unsigned no); /*!< copy p4 of jets and legs into jets_p4_ and legs_p4_ */
   void prepareVariables(const std::vector<const HTTParticle*>* legs, const std::vector<const HTTParticle*>* jets); /*!< Prepare vars that will be used for saving to TTree */

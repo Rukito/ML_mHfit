@@ -188,6 +188,10 @@ void MLAnalyzer::addBranch(TTree *tree)
 			tree->Branch("SVfitMass", &SVfitMass_);		//trudnick
                         tree->Branch("METx", &METx_);	        	//trudnick
                         tree->Branch("METy", &METy_);   		//trudnick
+			tree->Branch("cov00", &cov00_);			//trudnick
+                        tree->Branch("cov10", &cov10_);                 //trudnick
+                        tree->Branch("cov01", &cov01_);                 //trudnick
+                        tree->Branch("cov11", &cov11_);                 //trudnick
 		}
 	}
 	else
@@ -401,6 +405,10 @@ void MLAnalyzer::globalsHTT(const MLObjectMessenger* mess, const std::vector<con
 		const float* SVfitMass = mess->getObject(static_cast<float*>(p), "SVfitMass");		//trudnick
                 const float* METx = mess->getObject(static_cast<float*>(p), "METx");			//trudnick
                 const float* METy = mess->getObject(static_cast<float*>(p), "METy");			//trudnick
+		const float* cov00 = mess->getObject(static_cast<float*>(p), "cov00");			//trudnick
+                const float* cov01 = mess->getObject(static_cast<float*>(p), "cov01");                  //trudnick
+                const float* cov10 = mess->getObject(static_cast<float*>(p), "cov10");                  //trudnick
+                const float* cov11 = mess->getObject(static_cast<float*>(p), "cov11");                  //trudnick
 
 		const HTTParticle* leg1 = legs->at(0);
 		const HTTParticle* leg2 = legs->at(1);
@@ -417,6 +425,10 @@ void MLAnalyzer::globalsHTT(const MLObjectMessenger* mess, const std::vector<con
 	    SVfitMass_ = *SVfitMass;		//trudnick
 	    METx_ = *METx;			//trudnick
             METy_ = *METy;			//trudnick
+	    cov00_ = *cov00;			//trudnick
+            cov01_ = *cov01;                    //trudnick
+            cov10_ = *cov10;                    //trudnick
+            cov11_ = *cov11;                    //trudnick
 	}
 	catch(const std::out_of_range& e)
 	{

@@ -116,20 +116,25 @@ def read_tree(file_name = "../../HTTAnalysis/RootAnalysis_AnalysisTT.root", tree
 	# plt.hist(properties[properties_names[0] ])
 	# plt.show()
 
-	mHfit_params = []						#trudnick
-	for i in range (0, 3):						#trudnick
-	    mHfit_params.append([])					#trudnick
+	#------ Save data for MLAnalysis (trudnick)-------------------------
+	mHfit_params = []
+	for i in range (0, 7):
+	    mHfit_params.append([])
 
-	for i in range (0, len(global_params["SVfitMass"])):		#trudnick
-	    mHfit_params[0].append(global_params["SVfitMass"][i])	#trudnick
-	    mHfit_params[1].append(global_params["METx"][i])		#trudnick
-	    mHfit_params[2].append(global_params["METy"][i])		#trudnick
+	for i in range (0, len(global_params["SVfitMass"])):
+	    mHfit_params[0].append(global_params["SVfitMass"][i])
+	    mHfit_params[1].append(global_params["METx"][i])
+	    mHfit_params[2].append(global_params["METy"][i])
+	    mHfit_params[3].append(global_params["cov00"][i])
+	    mHfit_params[4].append(global_params["cov01"][i])
+	    mHfit_params[5].append(global_params["cov10"][i])
+	    mHfit_params[6].append(global_params["cov11"][i])
 
-	with open("../Data/raw_data.txt", "wb") as file1:          	#trudnick
-	    pickle.dump(mHfit_params, file1)                       	#trudnick
+	with open("../Data/raw_data.txt", "wb") as file1:
+	    pickle.dump(mHfit_params, file1)
 
-	with open("../Data/legs_list.txt", "wb") as file2:		#trudnick
-	    pickle.dump(legs, file2)					#trudnick
+	with open("../Data/legs_list.txt", "wb") as file2:
+	    pickle.dump(legs, file2)
 
 	#------ Finished ------------------------------------
 	print("[ML]\tConversion to python successful!")

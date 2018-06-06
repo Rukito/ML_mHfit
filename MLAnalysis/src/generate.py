@@ -26,8 +26,10 @@ def generate():
     px2 = []
     py2 = []
     pz2 = []
-    #cov00 = []
-    #cov11 =[]
+    cov00 = []
+    cov01 = []
+    cov10 = []
+    cov11 = []
 
 
     for j in range (0, datasize):
@@ -44,10 +46,12 @@ def generate():
         px2 =	np.insert(px2, len(px2), legs[1][1][j])
         py2 =	np.insert(py2, len(py2), legs[1][2][j])
         pz2 =	np.insert(pz2, len(pz2), legs[1][3][j])
-        #cov00 =np.insert(cov00, len(cov00), raw_data[3][j])
-        #cov11 =np.insert(cov11, len(cov11), raw_data[4][j])
+        cov00 =np.insert(cov00, len(cov00), raw_data[3][j])
+        cov01 =np.insert(cov11, len(cov01), raw_data[4][j])
+       	cov10 =np.insert(cov11, len(cov10), raw_data[5][j])
+        cov11 =np.insert(cov11, len(cov11), raw_data[6][j])
 
-    data        = np.stack([mH,METx,METy, E1, px1, py1, pz1, E2, px2, py2, pz2], axis = -1)
+    data        = np.stack([mH,METx,METy, E1, px1, py1, pz1, E2, px2, py2, pz2, cov00, cov01, cov10, cov11], axis = -1)
     traindata   = data[:trainsize, :]
     valdata     = data[trainsize:trainsize+valsize, :]
     testdata    = data[trainsize+valsize:, :]
