@@ -186,8 +186,8 @@ void MLAnalyzer::addBranch(TTree *tree)
 			tree->Branch("BJetBetaScore", &betaScore_);
 			tree->Branch("nJets30", &nJets30_);
 			tree->Branch("SVfitMass", &SVfitMass_);		//trudnick
-                        tree->Branch("METx", &METx_);         //trudnick
-                        tree->Branch("METy", &METy_);         //trudnick
+                        tree->Branch("METx", &METx_);	        	//trudnick
+                        tree->Branch("METy", &METy_);   		//trudnick
 		}
 	}
 	else
@@ -398,9 +398,9 @@ void MLAnalyzer::globalsHTT(const MLObjectMessenger* mess, const std::vector<con
 		const float* bs = mess->getObject(static_cast<float*>(p), "beta_score");
 		const float* higgs_mass = mess->getObject(static_cast<float*>(p), "higgs_mass_trans");
 		const int* nJets = mess ->getObject(static_cast<int*>(p), "nJets30");
-		const float* SVfitMass = mess->getObject(static_cast<float*>(p), "SVfitMass");	//trudnick
-                const float* METx = mess->getObject(static_cast<float*>(p), "METx");  //trudnick
-                const float* METy = mess->getObject(static_cast<float*>(p), "METy");  //trudnick
+		const float* SVfitMass = mess->getObject(static_cast<float*>(p), "SVfitMass");		//trudnick
+                const float* METx = mess->getObject(static_cast<float*>(p), "METx");			//trudnick
+                const float* METy = mess->getObject(static_cast<float*>(p), "METy");			//trudnick
 
 		const HTTParticle* leg1 = legs->at(0);
 		const HTTParticle* leg2 = legs->at(1);
