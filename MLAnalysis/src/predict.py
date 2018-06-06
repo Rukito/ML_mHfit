@@ -8,8 +8,16 @@ def get_input_fn(data_set, num_epochs = None, shuffle = True):
 		x = {
 		'METx':  np.array(data_set[:,1]), 
 		'METy':  np.array(data_set[:,2]),
-		#'cov00': np.array(data_set[:,3]),
-		#'cov11': np.array(data_set[:,4])
+		'E1':  np.array(data_set[:,3]),
+		'px1':  np.array(data_set[:,4]),
+		'py1':  np.array(data_set[:,5]),
+		'pz1':  np.array(data_set[:,6]),
+		'E2':  np.array(data_set[:,7]),
+		'px2':  np.array(data_set[:,8]),
+		'py2':  np.array(data_set[:,9]),
+		'pz2':  np.array(data_set[:,10]),
+                #'cov00': np.array(data_set[:,11]),
+                #'cov11': np.array(data_set[:,12])
 		},
 		y = np.array(data_set[:,0]),
 		num_epochs = num_epochs,
@@ -22,10 +30,8 @@ def predict_mass(layers, steps, name):
 	valdata		= np.load('../Data/valdata.npy')
 	testdata	= np.load('../Data/testdata.npy')
 
-	#COLUMNS	= ['mH', 'METx', 'METy', 'cov00', 'cov11']
-	#FEATURES	= ['METx', 'METy', 'cov00', 'cov11']
-	COLUMNS		= ['mH', 'METx', 'METy']
-	FEATURES	= ['METx', 'METy']
+	COLUMNS		= ['mH', 'METx', 'METy', 'E1', 'px1', 'py1', 'pz1', 'E2', 'px2', 'py2', 'pz2']
+	FEATURES	= ['METx', 'METy', 'E1', 'px1', 'py1', 'pz1', 'E2', 'px2', 'py2', 'pz2']
 	LABEL		= 'mH'
 
 #	start = time.perf_counter()
