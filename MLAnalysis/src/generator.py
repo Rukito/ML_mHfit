@@ -10,7 +10,6 @@ def generate():
         legs = pickle.load(file2)
 
     datasize = len(raw_data[0])
-#    datasize = (50000)
     trainsize = int( datasize*6/10 )
     valsize = int( datasize*3/10 )
     testsize = datasize - trainsize - valsize
