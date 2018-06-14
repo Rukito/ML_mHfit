@@ -47,7 +47,7 @@ def predict_mass(layers, steps, name):
 	regressor	= tf.estimator.DNNRegressor(
 	feature_columns = feature_cols,
 	hidden_units = layers,
-	model_dir="../models/"+name+"/dane",
+	model_dir='../models/' + name + '_steps_' + str(steps) + "/dane",
 	activation_fn=tf.nn.relu,
 	optimizer = tf.train.AdamOptimizer(learning_rate = 0.001, beta1=0.9, beta2=0.999),
 	config=tf.estimator.RunConfig().replace(save_summary_steps=100) )		#specifies sth for sth
@@ -67,21 +67,22 @@ def predict_mass(layers, steps, name):
 	#print('Input: {}'.format(str(testdata[:6] ) ) )
 	#print('Predictions: {}'.format(str(predictions ) ) )
 
+	#------ Calculate final values of test/train masses --------------------
 	predicted_mass_train 	= list( np.asscalar(p['predictions']) for p in z)
-	actual_mass_train	 	= traindata[:,0]
+	actual_mass_train	= traindata[:,0]
 	mass_difference_train	= np.abs(predicted_mass_train - actual_mass_train)
-	norm_squares_train		= np.sum(mass_difference_train**2)/np.shape(mass_difference_train)[0]
-
+	norm_squares_train	= np.sum(mass_difference_train**2)/np.shape(mass_difference_train)[0]
 
 	predicted_mass_test 	= list( np.asscalar(p['predictions']) for p in y)
 	actual_mass_test	 	= testdata[:,0]
 	mass_difference_test	= np.abs(predicted_mass_test - actual_mass_test)
 	norm_squares_test		= np.sum(mass_difference_test**2)/np.shape(mass_difference_test)[0]
 
-	np.save(name + '/predicted_mass_test', predicted_mass_test)
-	np.save(name + '/actual_mass_test', actual_mass_test)
-	np.save(name + '/predicted_mass_train', predicted_mass_train)
-	np.save(name + '/actual_mass_train', actual_mass_train)
+	#--------- Save data ---------------------------------------------------
+	np.save('../models/' + name + '_steps_' + str(steps) + '/predicted_mass_test', predicted_mass_test)
+	np.save('../models/' + name + '_steps_' + str(steps) + '/actual_mass_test', actual_mass_test)
+	np.save('../models/' + name + '_steps_' + str(steps) + '/predicted_mass_train', predicted_mass_train)
+	np.save('../models/' + name + '_steps_' + str(steps) + '/actual_mass_train', actual_mass_train)
 
 	return predicted_mass_test, actual_mass_test, predicted_mass_train, actual_mass_train, end, loss_score
 

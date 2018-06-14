@@ -4,18 +4,18 @@ import matplotlib
 
 def plot_partial(folder,lwarstw,nr,show = False):
 
-	predicted_mass_train	= np.load(folder+'/predicted_mass_train.npy')
-	predicted_mass_test		= np.load(folder+'/predicted_mass_test.npy')
-	actual_mass_train		= np.load(folder+'/actual_mass_train.npy')
-	actual_mass_test		= np.load(folder+'/actual_mass_test.npy')
+	predicted_mass_train		= np.load('../models/'+folder+'/predicted_mass_train.npy')
+	predicted_mass_test		= np.load('../models/'+ffolder+'/predicted_mass_test.npy')
+	actual_mass_train		= np.load('../models/'+ffolder+'/actual_mass_train.npy')
+	actual_mass_test		= np.load('../models/'+ffolder+'/actual_mass_test.npy')
 	
 	mass_difference_train		= predicted_mass_train - actual_mass_train
 	mass_difference_sq_train	= mass_difference_train**2
-	RMSD_train					= np.sqrt(np.sum(mass_difference_sq_train)/np.shape(mass_difference_sq_train)[0])
+	RMSD_train			= np.sqrt(np.sum(mass_difference_sq_train)/np.shape(mass_difference_sq_train)[0])
 
 	mass_difference_test		= predicted_mass_test - actual_mass_test
 	mass_difference_sq_test		= mass_difference_test**2
-	RMSD_test					= np.sqrt(np.sum(mass_difference_sq_test)/np.shape(mass_difference_sq_test)[0])
+	RMSD_test			= np.sqrt(np.sum(mass_difference_sq_test)/np.shape(mass_difference_sq_test)[0])
 
 	plt.scatter(actual_mass_train, mass_difference_train, alpha = 0.4, facecolors='none', edgecolors='r', label = 'dane treningowe', s = 20)
 	plt.scatter(actual_mass_test, mass_difference_test, alpha = 1, c='b', marker='x', label = 'dane testowe', s = 20)

@@ -9,8 +9,8 @@ def generate():
     with open("../Data/legs_list.txt", "rb") as file2:
         legs = pickle.load(file2)
 
-#    datasize = len(raw_data[0])
-    datasize = (50000)
+    datasize = len(raw_data[0])
+#    datasize = (50000)
     trainsize = int( datasize*6/10 )
     valsize = int( datasize*3/10 )
     testsize = datasize - trainsize - valsize
