@@ -48,7 +48,7 @@ plt.title('Mass difference')
 plt.xlabel('Actual mass')
 plt.ylabel('Mass difference')
 plt.legend()
-plt.savefig(fig_png_path + 'keras_mass_diff.png')
+plt.savefig(fig_png_path + 'keras_mass_diff_range.png')
 if(show=='True'):
   plt.show()
 plt.clf()
