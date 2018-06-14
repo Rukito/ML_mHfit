@@ -185,9 +185,15 @@ void MLAnalyzer::addBranch(TTree *tree)
 			tree->Branch("higgsPT", &higgsPT_);
 			tree->Branch("BJetBetaScore", &betaScore_);
 			tree->Branch("nJets30", &nJets30_);
-			tree->Branch("SVfitMass", &SVfitMass_);		//trudnick
-                        tree->Branch("METx", &METx_);         //trudnick
-                        tree->Branch("METy", &METy_);         //trudnick
+			//------- trudnick --------------------------------------------
+			tree->Branch("SVfitMass", &SVfitMass_);
+                        tree->Branch("METx", &METx_);
+                        tree->Branch("METy", &METy_);
+			tree->Branch("cov00", &cov00_);
+                        tree->Branch("cov10", &cov10_);
+                        tree->Branch("cov01", &cov01_);
+                        tree->Branch("cov11", &cov11_);
+			//-----------------------------------------------------------
 		}
 	}
 	else
@@ -398,14 +404,19 @@ void MLAnalyzer::globalsHTT(const MLObjectMessenger* mess, const std::vector<con
 		const float* bs = mess->getObject(static_cast<float*>(p), "beta_score");
 		const float* higgs_mass = mess->getObject(static_cast<float*>(p), "higgs_mass_trans");
 		const int* nJets = mess ->getObject(static_cast<int*>(p), "nJets30");
-		const float* SVfitMass = mess->getObject(static_cast<float*>(p), "SVfitMass");	//trudnick
-                const float* METx = mess->getObject(static_cast<float*>(p), "METx");  //trudnick
-                const float* METy = mess->getObject(static_cast<float*>(p), "METy");  //trudnick
-
+		//------- trudnick --------------------------------------------------------------------------
+		const float* SVfitMass = mess->getObject(static_cast<float*>(p), "SVfitMass");
+                const float* METx = mess->getObject(static_cast<float*>(p), "METx");
+                const float* METy = mess->getObject(static_cast<float*>(p), "METy");
+		const float* cov00 = mess->getObject(static_cast<float*>(p), "cov00");
+                const float* cov01 = mess->getObject(static_cast<float*>(p), "cov01");
+                const float* cov10 = mess->getObject(static_cast<float*>(p), "cov10");
+                const float* cov11 = mess->getObject(static_cast<float*>(p), "cov11");
+		//------------------------------------------------------------------------------------------
 		const HTTParticle* leg1 = legs->at(0);
 		const HTTParticle* leg2 = legs->at(1);
 
-		if(!(leg1 && leg2 && aMET && aSystEffect && bs && higgs_mass && nJets && SVfitMass))
+		if(!(leg1 && leg2 && aMET && aSystEffect && bs && higgs_mass && nJets && SVfitMass && cov00 && cov01 && cov10 && cov11))	//trudnick
 			throw std::logic_error("[ERROR] NULL POINTERS PRESENT!");
 		// Calculation and assignement of global parameters
 		const TLorentzVector & aVisSum = leg1->getP4(*aSystEffect) + leg2->getP4(*aSystEffect);
@@ -414,9 +425,15 @@ void MLAnalyzer::globalsHTT(const MLObjectMessenger* mess, const std::vector<con
 	    betaScore_ = *bs;
 	    higgsMassTrans_ = *higgs_mass;
 	    nJets30_ = *nJets;
-	    SVfitMass_ = *SVfitMass;		//trudnick
-	    METx_ = *METx;			//trudnick
-            METy_ = *METy;			//trudnick
+	    //----trudnick --------------------------------------------
+	    SVfitMass_ = *SVfitMass;
+	    METx_ = *METx;
+            METy_ = *METy;
+	    cov00_ = *cov00;
+            cov01_ = *cov01;
+            cov10_ = *cov10;
+            cov11_ = *cov11;
+	    //--------------------------------------------------------
 	}
 	catch(const std::out_of_range& e)
 	{

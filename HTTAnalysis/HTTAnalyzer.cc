@@ -335,13 +335,23 @@ bool HTTAnalyzer::analyze(const EventProxyBase& iEvent, ObjectMessenger *aMessen
                         float higgs_mass_trans = aPair.getMTMuon(aSystEffect);
                         mess->putObject(higgs_mass_trans, "higgs_mass_trans");
 
-			float SVfitMass = aPair.getP4(aSystEffect).M();	//trudnick
-			mess->putObject(SVfitMass, "SVfitMass");	//trudnick
-                        float METx = aPair.getMET().X(); 		//trudnick
-                        mess->putObject(METx, "METx");       		//trudnick
-                        float METy = aPair.getMET().Y();                //trudnick
-                        mess->putObject(METy, "METy");        		//trudnick
-
+			//-------------trudnick ---------------------------------------
+                       	std::vector<float> metMatrix = aPair.getMETMatrix();
+			float cov00 = metMatrix[0];
+			float cov01 = metMatrix[1];
+                        float cov10 = metMatrix[2];
+                        float cov11 = metMatrix[3];
+                       	mess->putObject(cov00, "cov00");
+                        mess->putObject(cov01, "cov01");
+                        mess->putObject(cov10, "cov10");
+                        mess->putObject(cov11, "cov11");
+			float SVfitMass = aPair.getP4(aSystEffect).M();
+			mess->putObject(SVfitMass, "SVfitMass");
+                        float METx = aPair.getMET().X();
+                        mess->putObject(METx, "METx");
+                        float METy = aPair.getMET().Y();
+                        mess->putObject(METy, "METy");
+			//-----------------------------------------------------------
                     }
                     catch(const std::exception& e)
                     {
