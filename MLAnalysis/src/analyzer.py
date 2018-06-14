@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 #------ Name and load model ------------------------------
 model_name = 'model_50epochs'
-fig_png_path = '../fig_png/Keras_model/' + model_name + '/'
+fig_png_path = '../fig_png/' + model_name + '/'
 model = load_model('../models/'+model_name+'.h5')
 show = 'False'
 
