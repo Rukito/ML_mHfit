@@ -10,9 +10,10 @@ def generate():
         legs = pickle.load(file2)
 
     datasize = len(raw_data[0])
-    trainsize = int( datasize*6/10 )
-    valsize = int( datasize*3/10 )
+    trainsize = int( datasize*9/10 )
+    valsize = 0 #int( datasize*3/10 )
     testsize = datasize - trainsize - valsize
+    print(trainsize, testsize)
 
     mH = []
     METx = []
