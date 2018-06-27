@@ -38,7 +38,7 @@ def plots(model_name, show=False):
     RMSD += mean_sq_test[0][i]
   RMSD = RMSD/mean_sq_test.size
   print(RMSD)
-'''
+
   #------ Mass histo -------------------
   plt.hist(predicted_mass_test, bins = 450, range = (0,450), label = 'predicted', alpha = 0.5, color = 'r')
   plt.hist(y_test.T, bins = 450, range = (0,450), label = 'actual', alpha = 0.3, color = 'b')
@@ -113,7 +113,7 @@ def plots(model_name, show=False):
     plt.show()
   plt.clf()
 
-'''
+
 if __name__ == '__main__':
         plots('finallay_24_epochs_30_iter_3', True)
 
