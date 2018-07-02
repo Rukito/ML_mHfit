@@ -118,7 +118,7 @@ def read_tree(file_name = "../../HTTAnalysis/RootAnalysis_AnalysisTT.root", tree
 
 	#------ Save data for MLAnalysis (trudnick)-------------------------
 	mHfit_params = []
-	for i in range (0, 7):
+	for i in range (0, 8):
 	    mHfit_params.append([])
 
 	for i in range (0, len(global_params["SVfitMass"])):
@@ -129,6 +129,7 @@ def read_tree(file_name = "../../HTTAnalysis/RootAnalysis_AnalysisTT.root", tree
 	    mHfit_params[4].append(global_params["cov01"][i])
 	    mHfit_params[5].append(global_params["cov10"][i])
 	    mHfit_params[6].append(global_params["cov11"][i])
+	    mHfit_params[7].append(global_params["visMass"][i])
 
 	with open("../Data/raw_data.txt", "wb") as file1:
 	    pickle.dump(mHfit_params, file1)

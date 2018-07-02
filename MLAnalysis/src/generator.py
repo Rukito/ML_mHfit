@@ -9,15 +9,21 @@ def generate():
     with open("../Data/legs_list.txt", "rb") as file2:
         legs = pickle.load(file2)
 
-    datasize = len(raw_data[0])
+    datasize = 5000
+    #datasize = len(raw_data[0])
     trainsize = int( datasize*7/10 )
     valsize = int( datasize*2/10 )
     testsize = datasize - trainsize - valsize
-    print(trainsize, valsize, testsize)
+    print(datasize, trainsize, valsize, testsize)
 
     mH = []
     METx = []
     METy = []
+    cov00 = []
+    cov01 = []
+    cov10 = []
+    cov11 = []
+    visMass = []
     E1 = []
     px1 = []
     py1 = []
@@ -26,10 +32,6 @@ def generate():
     px2 = []
     py2 = []
     pz2 = []
-    cov00 = []
-    cov01 = []
-    cov10 = []
-    cov11 = []
 
 
     for j in range (0, datasize):
@@ -50,8 +52,9 @@ def generate():
         cov01 =np.insert(cov11, len(cov01), raw_data[4][j])
        	cov10 =np.insert(cov11, len(cov10), raw_data[5][j])
         cov11 =np.insert(cov11, len(cov11), raw_data[6][j])
+        visMass = np.insert(visMass, len(visMass), raw_data[7][j])
 
-    data        = np.stack([mH,METx,METy, E1, px1, py1, pz1, E2, px2, py2, pz2, cov00, cov01, cov10, cov11], axis = -1)
+    data        = np.stack([mH,METx,METy, cov00, cov01, cov10, cov11, visMass, E1, px1, py1, pz1, E2, px2, py2, pz2], axis = -1)
     traindata   = data[:trainsize, :]
     valdata     = data[trainsize:trainsize+valsize, :]
     testdata    = data[trainsize+valsize:, :]
