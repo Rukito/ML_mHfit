@@ -12,7 +12,7 @@ class Histories(keras.callbacks.Callback):
 		return
 
 	def on_epoch_end(self, epoch, logs={}):
-		self.losses.append(logs.get('loss'))
+		self.losses.append(logs.get('val_loss'))
 		y_pred = self.model.predict(self.validation_data[0])
 		return
 
